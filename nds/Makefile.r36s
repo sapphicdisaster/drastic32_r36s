@@ -1,0 +1,32 @@
+export MOD=r36s
+export NDS_GCC=1
+export NDS_ALSA=1
+export NDS_RUNNER=1
+
+CCFLAGS += -O3
+CFLAGS  += -DR36S
+CFLAGS  += -Wl,--no-undefined
+
+CFLAGS  += -marm
+CFLAGS  += -mtune=cortex-a35
+CFLAGS  += -mfpu=neon-fp-armv8
+CFLAGS  += -mfloat-abi=hard
+CFLAGS  += -I../json-c
+CFLAGS  += -I..
+CFLAGS  += -I../include
+
+LDFLAGS += -ljson-c -L$(shell pwd)/common
+LDFLAGS += -L$(shell pwd)/../device_sysroot/lib -L$(shell pwd)/../device_sysroot/usr/lib
+LDFLAGS += -lstdc++
+LDFLAGS += -Wl,--allow-shlib-undefined
+ 
+export MORE_CFLAGS=${CFLAGS}
+export MORE_LDFLAGS=${LDFLAGS}
+export CFLAGS
+export LDFLAGS
+
+include Makefile.base
+
+.PHONY: cp
+cp:
+	@echo "Copy command not defined for r36s"
